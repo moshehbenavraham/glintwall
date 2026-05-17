@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Be polite — give bots a moment between requests.
+Crawl-delay: 1
+
+Sitemap: https://jamierodriguez.photo/sitemap.xml

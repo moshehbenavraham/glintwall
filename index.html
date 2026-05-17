@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8f3ea" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1f1813" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!--
+      Anti-FOUC bootstrap: apply the user's resolved theme synchronously
+      before React paints, so dark-OS visitors don't see a flash of the
+      light palette on first paint. Must run before any stylesheet that
+      relies on the `.dark` class. Keep `storageKey` in sync with the
+      value passed to <ThemeProvider> in src/App.tsx.
+    -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("visual-gallery-theme");
+          var prefersDark =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var resolved =
+            stored === "dark" || stored === "light"
+              ? stored
+              : prefersDark
+              ? "dark"
+              : "light";
+          if (resolved === "dark") {
+            document.documentElement.classList.add("dark");
+          }
+          document.documentElement.style.colorScheme = resolved;
+        } catch (e) {
+          /* localStorage / matchMedia unavailable — fall back to light. */
+        }
+      })();
+    </script>
+
+    <title>Jamie Rodriguez — People Photographer & Storyteller</title>
+    <meta name="description" content="Warm, natural photography by Jamie Rodriguez. Capturing authentic moments and genuine connections with people doing what they love." />
+    <meta name="author" content="Jamie Rodriguez" />
+    <meta name="robots" content="index,follow" />
+
+    <link rel="canonical" href="https://jamierodriguez.photo/" />
+
+    <meta property="og:site_name" content="Jamie Rodriguez Photography" />
+    <meta property="og:title" content="Jamie Rodriguez — People Photographer & Storyteller" />
+    <meta property="og:description" content="Warm, natural photography capturing authentic moments and genuine connections with people doing what they love." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jamierodriguez.photo/" />
+    <meta property="og:image" content="https://jamierodriguez.photo/images/social-card.svg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Jamie Rodriguez — People Photographer & Storyteller" />
+    <meta name="twitter:description" content="Warm, natural photography capturing authentic moments and genuine connections with people doing what they love." />
+    <meta name="twitter:image" content="https://jamierodriguez.photo/images/social-card.svg" />
+    <meta name="twitter:url" content="https://jamierodriguez.photo/" />
+  </head>
+
+  <body>
+    <noscript>
+      <div style="max-width:640px;margin:4rem auto;padding:0 1.5rem;font-family:Georgia,serif;color:#261d18;text-align:center">
+        <h1 style="font-size:2rem;margin-bottom:1rem">Jamie Rodriguez Photography</h1>
+        <p>This portfolio is built with React and needs JavaScript enabled to display the gallery. Please enable JavaScript or reach out at <a href="mailto:hello@jamierodriguez.photo" style="color:#d77f55">hello@jamierodriguez.photo</a> to see the work.</p>
+      </div>
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
